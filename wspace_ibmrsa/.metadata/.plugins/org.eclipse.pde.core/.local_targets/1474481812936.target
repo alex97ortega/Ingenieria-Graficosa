@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><?pde version="3.8"?><target name="WebSphere Application Server v8.5 stub" sequenceNumber="0">
-<locations>
-<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v85_stub/dev" type="Directory"/>
-<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v85_stub/dev/JavaEE" type="Directory"/>
-<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v85_stub/dev/sip" type="Directory"/>
-<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v85_stub/dev/osgi/4.2" type="Directory"/>
-<location path="C:/Users/Administrador/wspace_ibmrsa/.metadata/.plugins/com.ibm.etools.aries.core/system/" type="Directory"/>
-</locations>
-</target>
