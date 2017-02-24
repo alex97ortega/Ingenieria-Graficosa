@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><?pde version="3.8"?><target name="WebSphere Application Server v7.0 stub" sequenceNumber="12">
+<locations>
+<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v7_stub/feature_packs/aries" type="Directory"/>
+<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v7_stub/feature_packs/jpa" type="Directory"/>
+<location path="C:/software/programacion/IBMRSA/SDPv9/runtimes/base_v7_stub/feature_packs/cea" type="Directory"/>
+<location path="C:/Users/Administrador/wspace_ibmrsa/.metadata/.plugins/com.ibm.etools.aries.core/system/" type="Directory"/>
+</locations>
+</target>

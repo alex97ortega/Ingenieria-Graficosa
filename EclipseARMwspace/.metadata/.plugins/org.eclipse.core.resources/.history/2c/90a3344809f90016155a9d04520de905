@@ -1,0 +1,93 @@
+/*-----------------------------------------------------------------
+**
+**  Fichero:
+**    trafo.h  10/6/2014
+**
+**    Estructura de Computadores
+**    Dpto. de Arquitectura de Computadores y Automática
+**    Facultad de Informática. Universidad Complutense de Madrid
+**
+**  Propósito:
+**    Contiene las implementaciones de las funciones en C
+**    usadas por el programa principal
+**
+**  Notas de diseño:
+**
+**---------------------------------------------------------------*/
+
+#include "trafo.h"
+#include "types.h"
+
+// COMPLETAR LAS FUNCIONES EN BLANCO
+
+unsigned char rgb2gray(pixelRGB* pixel) {
+	char gray;
+	gray = 2126  *pixel->R + 7152 * pixel->G + 722 * pixel->G;
+	return gray;
+}
+
+void RGB2GrayMatrix(pixelRGB orig[], unsigned char dest[], int nfilas, int ncols) {
+    int i,j;
+
+    for (i=0;i<nfilas;i++)
+        for (j=0; j<ncols; j++)
+            dest[i*ncols+j] =  rgb2gray(&orig[i*ncols+j]);
+}
+
+void Gray2BinaryMatrix(unsigned char orig[], unsigned char dest[], unsigned char umbral, int nfilas, int ncols) {
+//orig = imagenGris, dest = imagenBinaria.
+	int i,j;
+	for (i = 0; i < nfilas; i++) {
+		for (j = 0; j < ncols; j++) {
+			if (orig[i*ncols + j] > umbral) {
+				dest[i*ncols + j] = 1;
+			}
+			else {
+				dest[i*ncols + j] = 0;
+			}
+		}
+	}
+
+}
+
+void computeHistogram(unsigned char imagenGris[],short int histogram[],int nfilas,int ncols) {
+	int i, j;
+	for (i = 0; i < nfilas; i++) {
+		for (j = 0; j < ncols; j++) {
+			histogram[ imagenGris[ i* ncols + j] ] ++;
+		}
+	}
+}
+
+//simple (may be dumb) algorithm: find the max value between index 0..127
+// and btw. 128.255. Then, get the mid point
+unsigned char computeThreshold(short int histogram[]) {
+	unsigned char threshold;
+	short int max = -1, max2 = -1;
+	int max_idx = -1, max2_idx = -1, i;
+	for( i = 0; i < 128; i++) {
+		if(histogram[i] > max) {
+			max = histogram[i];
+			max_idx = i;
+		}
+	}
+	for(i = 128; i <255; i++) {
+		if (histogram[i] > max2) {
+			max2 = histogram[i];
+			max2_idx = i;
+		}
+	}
+	threshold = max_idx + (max2_idx - max_idx) / 2;
+}
+
+void contarUnos(unsigned char mat[], short int vector[],int nfilas, int ncols) {
+
+
+
+}
+
+
+
+
+
+
