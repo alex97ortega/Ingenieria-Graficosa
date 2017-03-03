@@ -17,8 +17,9 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-  triangulo.draw();
+  //triangulo.draw();
   ejes.draw();
+  piramide.draw();
 }
 
 //-------------------------------------------------------------------------
@@ -34,13 +35,17 @@ Triangulo::Triangulo(GLdouble r){
 	vertices[1].set(x, y, 0);
 	vertices[2].set(x, -y, 0);
 
+	normales[0].set(0, 0, 1);
+	normales[1].set(0, 0, 1);
+	normales[2].set(0, 0, 1);
 
 	colores[0].set(0, 0, 1);
-	colores[1].set(0.1, 0.3, 0.5);
-	colores[2].set(0, 1, 1);
+	
 }
 
 void Triangulo::draw(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vertices);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -55,6 +60,26 @@ void Triangulo::draw(){
 
 
 }
+
+//-------------------------------------------------------------------------
+
+PiramideTri::PiramideTri(GLdouble h, GLdouble radio) : t1(100), t2(100), t3(100){
+	altura(h, t2, 0);
+	altura(h, t3, 0);
+}
+void PiramideTri::draw(){
+	t1.draw();
+	t2.draw();
+	//t3.draw();
+}
+
+void PiramideTri::altura(GLdouble h, Triangulo &t, int i){
+	t.vertices[i].set(h, h, 0);
+
+
+}
+
+//-------------------------------------------------------------------------
 
 Ejes::Ejes(GLdouble l) {
   vertices[0].set(0, 0, 0);
