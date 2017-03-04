@@ -8,7 +8,14 @@ void Escena::init(){
 }
 
 //-------------------------------------------------------------------------
+Escena::Escena() : ejes(200) {
 
+	piramides.push_back(new PiramideTri(100, 100));
+	piramides.push_back(new PiramideTri(100, 100));
+	piramides.push_back(new PiramideTri(-100, -100));
+	piramides.push_back(new PiramideTri(-100, -100));
+
+}
 Escena::~Escena(){
    // liberar memoria y recursos 
 }
@@ -16,11 +23,28 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-  //triangulo.draw();
+  
   ejes.draw();
-  piramide.draw();
+  //triangulo.draw();
+  //piramide.draw();
+  drawDiabolo();
 }
-
+void Escena::drawDiabolo() {
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	glTranslated(0.0, 0.0, -100);
+	piramides[0]->draw();
+	
+	glRotated(-180, 1.0, 0.0, 0.0);
+	glTranslated(0.0, 0.0, -200);
+	piramides[1]->draw();
+	
+	glRotated(180.0, 90.0, 0.0, 1.0);
+	piramides[2]->draw();
+	
+	glTranslated(0.0, 0.0, -200);
+	glRotated(180, 1.0, 0.0, 0.0);
+	piramides[3]->draw();
+}
 //-------------------------------------------------------------------------
 Triangulo::Triangulo(GLdouble r){
 

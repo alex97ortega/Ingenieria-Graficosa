@@ -42,18 +42,21 @@ public:
 };
 
 
+
 //-------------------------------------------------------------------------
 
 class Escena {
 public:
-  Escena(): ejes(200) , piramide(100, 100){};
+  Escena();
   ~Escena();
   void init();
   void draw();
+  void drawDiabolo();
 public:
   Ejes ejes;
  // Triangulo triangulo;
-  PiramideTri piramide;
+ // PiramideTri piramide;
+  std::vector<PiramideTri*> piramides;
 };
 
 //-------------------------------------------------------------------------
