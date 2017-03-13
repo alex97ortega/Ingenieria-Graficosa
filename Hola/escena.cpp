@@ -8,7 +8,7 @@ void Escena::init(){
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200) {
+Escena::Escena() : ejes(200), t(10, 1, 100) {
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -25,7 +25,7 @@ Escena::~Escena(){
 void Escena::draw(){
   
   ejes.draw();
-  //triangulo.draw();
+  t.draw();
   //piramide.draw();
   drawDiabolo();
 }
@@ -101,7 +101,24 @@ void PiramideTri::draw(){
 		triangulos[i]->draw();
 	}
 }
-
+triAnimado::triAnimado(GLdouble rot, GLdouble z, GLdouble r) {
+	rotaux = rot;
+	giroaux = z;
+	rad = r;
+}
+void triAnimado::update() {
+	rot += rotaux;
+	giro += giroaux;
+}
+void triAnimado::draw() {
+	GLdouble x = rad * cos(giro / 6.28);
+	GLdouble y = rad * sin(giro / 6.28);
+	glTranslated(x, y, 0);
+	glRotated(rot, 0.0, 0.0, 1.0);
+	tri->draw();
+	glRotated(-rot, 0.0, 0.0, 1.0);
+	glTranslated(-x, -y, 0);
+}
 
 
 //-------------------------------------------------------------------------

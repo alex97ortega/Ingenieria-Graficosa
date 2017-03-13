@@ -162,6 +162,9 @@ void key(unsigned char key, int x, int y){
   case 'o':
 	  camera.setEZ();
 	  break;
+  case 't':
+	  escena.t.update();
+	  break;
   default:
     need_redisplay = false;
     break;

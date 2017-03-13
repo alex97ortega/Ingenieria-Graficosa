@@ -69,10 +69,13 @@
   <ItemGroup>
     <ClCompile Include="escena.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PixMap24RGB.cpp" />
     <ClCompile Include="tipos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="escena.h" />
+    <ClInclude Include="PixMap24RGB.h" />
+    <ClInclude Include="Textura.h" />
     <ClInclude Include="tipos.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -23,6 +23,18 @@ public:
 };
 
 //-------------------------------------------------------------------------
+class CTEx2 {
+	GLdouble s, t;
+public:
+	CTEx2(GLdouble coorS, GLdouble coorT) : s(coorS), t(coorT) {};
+};
+
+class Color4 {
+	GLdouble red, green, blue, alpha;
+public:	
+	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a) : red(r), green(g), blue(b), alpha(a) {};
+};
+//-------------------------------------------------------------------------
 
 class Camara {
 public:

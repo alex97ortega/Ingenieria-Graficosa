@@ -35,13 +35,25 @@ public:
 	PiramideTri(GLdouble h, GLdouble radio);
 	~PiramideTri(){};
 	void draw();
-public:
-	
+public:	
 	std::vector<Triangulo*> triangulos;
 
 };
 
+class triAnimado {
+	Triangulo*tri = new Triangulo(50);
+	GLdouble rotaux;
+	GLdouble giroaux;
+	GLdouble rot = 0;
+	GLdouble giro = 0;
+	GLdouble rad;
 
+public:
+	triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio);
+	~triAnimado() {};
+	void update();
+	void draw();	
+};
 
 //-------------------------------------------------------------------------
 
@@ -54,7 +66,7 @@ public:
   void drawDiabolo();
 public:
   Ejes ejes;
- // Triangulo triangulo;
+  triAnimado t;
  // PiramideTri piramide;
   std::vector<PiramideTri*> piramides;
 };
