@@ -6,18 +6,18 @@
 //-------------------------------------------------------------------------
 class Ejes {
 public:
-  Ejes(GLdouble l);
-  ~Ejes(){};
-  void draw();
+	Ejes(GLdouble l);
+	~Ejes(){};
+	void draw();
 public:
-  PVec3 vertices[6];
-  PVec3 colores[6];
+	PVec3 vertices[6];
+	PVec3 colores[6];
 };
 
 //-------------------------------------------------------------------------
 class Triangulo {
 public:
-	Triangulo(GLdouble l);
+	Triangulo(GLdouble r);
 	~Triangulo(){};
 	void draw(); // por ultimo dibujar los ejes desde el punto creado tope de molongui
 	void set(int n, GLdouble h);
@@ -28,6 +28,27 @@ public:
 	PVec3 colores[1];
 };
 
+
+//-------------------------------------------------------------------------
+
+class TriAnimado {
+public:
+	TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot);
+	~TriAnimado(){};
+	void draw();
+	void update();
+
+public:
+
+	Triangulo tri;
+
+	GLdouble radio;
+	GLdouble rotacion;
+	GLdouble trans;
+
+
+};
+
 //-------------------------------------------------------------------------
 
 class PiramideTri{
@@ -35,40 +56,28 @@ public:
 	PiramideTri(GLdouble h, GLdouble radio);
 	~PiramideTri(){};
 	void draw();
-public:	
+public:
+
 	std::vector<Triangulo*> triangulos;
 
 };
 
-class triAnimado {
-	Triangulo*tri = new Triangulo(50);
-	GLdouble rotaux;
-	GLdouble giroaux;
-	GLdouble rot = 0;
-	GLdouble giro = 0;
-	GLdouble rad;
 
-public:
-	triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio);
-	~triAnimado() {};
-	void update();
-	void draw();	
-};
 
 //-------------------------------------------------------------------------
 
 class Escena {
 public:
-  Escena();
-  ~Escena();
-  void init();
-  void draw();
-  void drawDiabolo();
+	Escena();
+	~Escena();
+	void init();
+	void draw();
+	void drawDiabolo();
+
 public:
-  Ejes ejes;
-  triAnimado t;
- // PiramideTri piramide;
-  std::vector<PiramideTri*> piramides;
+	Ejes ejes;
+
+	std::vector<PiramideTri*> piramides;
 };
 
 //-------------------------------------------------------------------------
