@@ -22,18 +22,7 @@ public:
   GLdouble x, y, z;
 };
 
-//-------------------------------------------------------------------------
-class CTEx2 {
-	GLdouble s, t;
-public:
-	CTEx2(GLdouble coorS, GLdouble coorT) : s(coorS), t(coorT) {};
-};
 
-class Color4 {
-	GLdouble red, green, blue, alpha;
-public:	
-	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a) : red(r), green(g), blue(b), alpha(a) {};
-};
 //-------------------------------------------------------------------------
 
 class Camara {
@@ -68,6 +57,32 @@ public:
   GLint x, y;
   GLsizei w, h;
 };
+
+//-------------------------------------------------------------------------
+
+class CTex2{
+public:
+	CTex2(GLdouble sp, GLdouble tp) : s(sp), t(tp){};
+	~CTex2();
+public:
+	GLdouble s;
+	GLdouble t;
+
+};
+
+//-------------------------------------------------------------------------
+
+class Color4{
+public:
+	Color4(GLdouble rp, GLdouble gp, GLdouble bp, GLdouble ap) : r(rp), g(gp), b(bp), a(ap){};
+	~Color4();
+public:
+	GLdouble r;
+	GLdouble g;
+	GLdouble b;
+	GLdouble a;
+};
+
 
 //-------------------------------------------------------------------------
 

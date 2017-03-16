@@ -70,6 +70,7 @@
     <ClCompile Include="escena.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixMap24RGB.cpp" />
+    <ClCompile Include="Textura.cpp" />
     <ClCompile Include="tipos.cpp" />
   </ItemGroup>
   <ItemGroup>

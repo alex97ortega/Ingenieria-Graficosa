@@ -3,6 +3,7 @@
 #define _H_escena_H_
 #include "tipos.h"
 #include <vector>
+#include "Textura.h"
 //-------------------------------------------------------------------------
 class Ejes {
 public:
@@ -24,7 +25,7 @@ public:
 public:
 	GLdouble var = (2 * 3.14) / 3; // rotar lo que nos diga este numero xdddd
 	PVec3 vertices[3];
-	PVec3 normales[3];
+	PVec3 normales[1];
 	PVec3 colores[1];
 };
 
@@ -63,6 +64,26 @@ public:
 };
 
 
+//-------------------------------------------------------------------------
+
+class Rectangulo{
+public :
+	Rectangulo(GLdouble altoc, GLdouble anchoc);
+	~Rectangulo(){};
+	void draw();
+	void set(GLdouble &anchop, GLdouble &altop);
+
+public :
+	GLdouble alto;
+	GLdouble ancho;
+	PVec3 vertices[4];
+	PVec3 ptext[4];
+	PVec3 normal;
+	PVec3 color;
+
+};
+
+
 
 //-------------------------------------------------------------------------
 
@@ -76,8 +97,10 @@ public:
 
 public:
 	Ejes ejes;
-
 	std::vector<PiramideTri*> piramides;
+
+	Textura textura;
+	Rectangulo recTex;
 };
 
 //-------------------------------------------------------------------------

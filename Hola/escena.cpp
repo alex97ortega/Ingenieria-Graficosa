@@ -3,8 +3,10 @@
 //-------------------------------------------------------------------------
 
 void Escena::init(){
-	// texturas
-	// luces
+
+	glEnable(GL_TEXTURE_2D);
+	textura.init();
+	textura.load("../bmps/ray.png");
 }
 
 //-------------------------------------------------------------------------
@@ -66,8 +68,8 @@ Triangulo::Triangulo(GLdouble r){
 	vertices[2].set(x, -y, 0);
 
 	normales[0].set(0, 0, 1);
-	normales[1].set(0, 0, 1);
-	normales[2].set(0, 0, 1);
+	/*normales[1].set(0, 0, 1);
+	normales[2].set(0, 0, 1);*/
 
 	colores[0].set(0, 0, 1);
 
@@ -76,7 +78,7 @@ void Triangulo::set(int n, GLdouble h) {
 	Triangulo::vertices[n] = { 0, 0, h };
 }
 void Triangulo::draw(){
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // pa que pinta sin rellenar
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, vertices);
@@ -161,6 +163,26 @@ Ejes::Ejes(GLdouble l) {
 }
 
 //-------------------------------------------------------------------------
+
+Rectangulo::Rectangulo(GLdouble altoc, GLdouble anchoc){
+
+	alto = altoc;
+	ancho = anchoc;
+
+	vertices[0].set(-alto / 2, -ancho / 2, 0);
+	vertices[1].set(alto / 2, -ancho / 2, 0);
+	vertices[2].set(alto / 2, ancho / 2, 0);
+	vertices[3].set(-alto / 2, ancho / 2, 0);
+
+}
+
+void Rectangulo::set(GLdouble &anchop, GLdouble &altop){
+	alto = altop;
+	ancho = anchop;
+}
+
+//-------------------------------------------------------------------------
+
 
 void Ejes::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
