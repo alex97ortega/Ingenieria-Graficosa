@@ -5,17 +5,18 @@
 void Escena::init(){
 
 	glEnable(GL_TEXTURE_2D);
-	textura.init();
-	textura.load("../bmps/ray.png");
+	rect.textura.init();
+	rect.textura.load("../bmps/Zelda.bmp");
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200){
+Escena::Escena() : ejes(200), rect(100,200){
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(-100, -100));
 	piramides.push_back(new PiramideTri(-100, -100));
+
 
 }
 Escena::~Escena(){
@@ -28,7 +29,7 @@ void Escena::draw(){
 
 	ejes.draw();
 	drawDiabolo();
-
+	//rect.draw();
 }
 void Escena::drawDiabolo() {
 	glRotated(90.0, 1.0, 0.0, 0.0);
@@ -68,8 +69,8 @@ Triangulo::Triangulo(GLdouble r){
 	vertices[2].set(x, -y, 0);
 
 	normales[0].set(0, 0, 1);
-	/*normales[1].set(0, 0, 1);
-	normales[2].set(0, 0, 1);*/
+	normales[1].set(0, 0, 1);
+	normales[2].set(0, 0, 1);
 
 	colores[0].set(0, 0, 1);
 
@@ -78,11 +79,12 @@ void Triangulo::set(int n, GLdouble h) {
 	Triangulo::vertices[n] = { 0, 0, h };
 }
 void Triangulo::draw(){
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, 0, vertices);
 	glEnableClientState(GL_COLOR_ARRAY);
+
+	glVertexPointer(3, GL_DOUBLE, 0, vertices);
 	glColorPointer(3, GL_DOUBLE, 0, colores);
 
 	glLineWidth(2);
@@ -169,11 +171,49 @@ Rectangulo::Rectangulo(GLdouble altoc, GLdouble anchoc){
 	alto = altoc;
 	ancho = anchoc;
 
-	vertices[0].set(-alto / 2, -ancho / 2, 0);
-	vertices[1].set(alto / 2, -ancho / 2, 0);
-	vertices[2].set(alto / 2, ancho / 2, 0);
-	vertices[3].set(-alto / 2, ancho / 2, 0);
+	vertices[0].set(-ancho / 2, alto / 2, 0); // reorganizar 
+	vertices[1].set(-ancho / 2, -alto / 2, 0);
+	vertices[2].set(ancho / 2, alto / 2, 0);
+	vertices[3].set(ancho / 2, -alto / 2, 0);
 
+	vtext[0].s = 0;
+	vtext[0].t = 1;
+	vtext[1].s = 0;
+	vtext[1].t = 0;
+	vtext[2].s = 1;
+	vtext[2].t = 1;
+	vtext[3].s = 1;
+	vtext[3].t = 0;
+	
+	normal.set(0, 0, 1);
+
+	color.a = 1;
+	color.b = 0;
+	color.g = 0;
+	color.r = 0;
+
+}
+
+void Rectangulo::draw(){
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_2D);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glColor4d(color.r, color.g, color.b, color.a);
+
+	glVertexPointer(3, GL_DOUBLE, 0, vertices);
+	glNormal3d(normal.x, normal.y, normal.z);
+
+	glTexCoordPointer(2, GL_DOUBLE, 0, vtext);
+
+	glLineWidth(2);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glLineWidth(1);
+
+	glDisableClientState(GL_TEXTURE_2D);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void Rectangulo::set(GLdouble &anchop, GLdouble &altop){

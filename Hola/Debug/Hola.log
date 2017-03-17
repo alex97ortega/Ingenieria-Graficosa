@@ -1,24 +1,17 @@
-﻿Build started 16/03/2017 18:24:29.
-     1>Project "C:\hlocal\kj\Ingenieria-Graficosa\Hola\Hola.vcxproj" on node 2 (Build target(s)).
+﻿Compilación iniciada a las 17/03/2017 11:31:33.
+     1>Proyecto "D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\Hola\Hola.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Textura.cpp escena.cpp main.cpp
-         main.cpp
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(18): error C2660: 'glTexEnvf' : function does not take 0 arguments
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(49): error C2065: 'pA' : undeclared identifier
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt escena.cpp
          escena.cpp
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(18): error C2660: 'glTexEnvf' : function does not take 0 arguments
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(49): error C2065: 'pA' : undeclared identifier
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\escena.cpp(13): error C2512: 'Rectangulo' : no appropriate default constructor available
-         Textura.cpp
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(18): error C2660: 'glTexEnvf' : function does not take 0 arguments
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(49): error C2065: 'pA' : undeclared identifier
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.cpp(5): error C2084: function 'Textura::Textura(void)' already has a body
-                 c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(8) : see previous definition of '{ctor}'
-     1>c:\hlocal\kj\ingenieria-graficosa\hola\textura.cpp(10): error C2084: function 'Textura::~Textura(void)' already has a body
-                 c:\hlocal\kj\ingenieria-graficosa\hola\textura.h(9) : see previous definition of '{dtor}'
-         Generating Code...
-     1>Done Building Project "C:\hlocal\kj\Ingenieria-Graficosa\Hola\Hola.vcxproj" (Build target(s)) -- FAILED.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.exe" /INCREMENTAL /NOLOGO freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.lib" /MACHINE:X86 Debug\escena.obj
+         Debug\main.obj
+         Debug\PixMap24RGB.obj
+         Debug\Textura.obj
+         Debug\tipos.obj
+         Hola.vcxproj -> D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.exe
+     1>Compilación del proyecto terminada "D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\Hola\Hola.vcxproj" (Build destinos).
 
-Build FAILED.
+Compilación correcta.
 
-Time Elapsed 00:00:01.34
+Tiempo transcurrido 00:00:00.76

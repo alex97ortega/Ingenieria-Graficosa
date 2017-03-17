@@ -62,8 +62,9 @@ public:
 
 class CTex2{
 public:
+	CTex2(){};
 	CTex2(GLdouble sp, GLdouble tp) : s(sp), t(tp){};
-	~CTex2();
+	~CTex2(){};
 public:
 	GLdouble s;
 	GLdouble t;
@@ -74,8 +75,9 @@ public:
 
 class Color4{
 public:
+	Color4(){};
 	Color4(GLdouble rp, GLdouble gp, GLdouble bp, GLdouble ap) : r(rp), g(gp), b(bp), a(ap){};
-	~Color4();
+	~Color4(){};
 public:
 	GLdouble r;
 	GLdouble g;

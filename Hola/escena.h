@@ -25,7 +25,7 @@ public:
 public:
 	GLdouble var = (2 * 3.14) / 3; // rotar lo que nos diga este numero xdddd
 	PVec3 vertices[3];
-	PVec3 normales[1];
+	PVec3 normales[3];
 	PVec3 colores[1];
 };
 
@@ -77,9 +77,10 @@ public :
 	GLdouble alto;
 	GLdouble ancho;
 	PVec3 vertices[4];
-	PVec3 ptext[4];
+	CTex2 vtext[4];
 	PVec3 normal;
-	PVec3 color;
+	Color4 color;
+	Textura textura;
 
 };
 
@@ -99,8 +100,7 @@ public:
 	Ejes ejes;
 	std::vector<PiramideTri*> piramides;
 
-	Textura textura;
-	Rectangulo recTex;
+	Rectangulo rect;
 };
 
 //-------------------------------------------------------------------------
