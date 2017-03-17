@@ -26,7 +26,11 @@ public:
 	GLdouble var = (2 * 3.14) / 3; // rotar lo que nos diga este numero xdddd
 	PVec3 vertices[3];
 	PVec3 normales[3];
-	PVec3 colores[1];
+	Color4 colores;
+	
+	CTex2 texttri[3];
+
+	Textura textura;
 };
 
 
@@ -71,11 +75,10 @@ public :
 	Rectangulo(GLdouble altoc, GLdouble anchoc);
 	~Rectangulo(){};
 	void draw();
-	void set(GLdouble &anchop, GLdouble &altop);
+	void set(GLdouble anchop, GLdouble altop);
 
 public :
-	GLdouble alto;
-	GLdouble ancho;
+	
 	PVec3 vertices[4];
 	CTex2 vtext[4];
 	PVec3 normal;
@@ -101,6 +104,7 @@ public:
 	std::vector<PiramideTri*> piramides;
 
 	Rectangulo rect;
+
 };
 
 //-------------------------------------------------------------------------

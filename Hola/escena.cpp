@@ -7,6 +7,8 @@ void Escena::init(){
 	glEnable(GL_TEXTURE_2D);
 	rect.textura.init();
 	rect.textura.load("../bmps/Zelda.bmp");
+	piramides[0]->triangulos[0]->textura.init();
+	piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
 }
 
 //-------------------------------------------------------------------------
@@ -40,7 +42,7 @@ void Escena::drawDiabolo() {
 	piramides[3]->draw();
 
 
-	glTranslated(0.0, 0.0, -200);
+	glTranslated(1.0, 0.0, -200);
 	piramides[1]->draw();
 
 	glRotated(180.0, 90.0, 0.0, 1.0);
@@ -72,7 +74,17 @@ Triangulo::Triangulo(GLdouble r){
 	normales[1].set(0, 0, 1);
 	normales[2].set(0, 0, 1);
 
-	colores[0].set(0, 0, 1);
+	colores.a = 1;
+	colores.b = 0;
+	colores.g = 0;
+	colores.r = 0;
+
+	texttri[0].s = -1;
+	texttri[0].t = -1;
+	texttri[1].s = 0;
+	texttri[1].t = 1;
+	texttri[2].s = 1;
+	texttri[2].t = -1;
 
 }
 void Triangulo::set(int n, GLdouble h) {
@@ -83,16 +95,25 @@ void Triangulo::draw(){
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_TEXTURE_2D);
 
 	glVertexPointer(3, GL_DOUBLE, 0, vertices);
-	glColorPointer(3, GL_DOUBLE, 0, colores);
+	//glColorPointer(3, GL_DOUBLE, 0, colores);
 
-	glLineWidth(2);
+	glTexCoordPointer(2, GL_DOUBLE, 0, texttri);
+
+	glNormal3d(normales[0].x, normales[0].y, normales[0].z);
+
+	glColor4d(colores.r, colores.g, colores.b, colores.a);
+
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glLineWidth(1);
 
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_2D);
+
 
 
 }
@@ -166,12 +187,9 @@ Ejes::Ejes(GLdouble l) {
 
 //-------------------------------------------------------------------------
 
-Rectangulo::Rectangulo(GLdouble altoc, GLdouble anchoc){
+Rectangulo::Rectangulo(GLdouble alto, GLdouble ancho){
 
-	alto = altoc;
-	ancho = anchoc;
-
-	vertices[0].set(-ancho / 2, alto / 2, 0); // reorganizar 
+	vertices[0].set(-ancho / 2, alto / 2, 0);  
 	vertices[1].set(-ancho / 2, -alto / 2, 0);
 	vertices[2].set(ancho / 2, alto / 2, 0);
 	vertices[3].set(ancho / 2, -alto / 2, 0);
@@ -216,9 +234,11 @@ void Rectangulo::draw(){
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-void Rectangulo::set(GLdouble &anchop, GLdouble &altop){
-	alto = altop;
-	ancho = anchop;
+void Rectangulo::set(GLdouble anchop, GLdouble altop){
+	vertices[0].set(-anchop / 2, altop / 2, 0);
+	vertices[1].set(-anchop / 2, -altop / 2, 0);
+	vertices[2].set(anchop / 2, altop / 2, 0);
+	vertices[3].set(anchop / 2, -altop / 2, 0);
 }
 
 //-------------------------------------------------------------------------
