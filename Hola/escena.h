@@ -98,6 +98,7 @@ public:
 	void init();
 	void draw();
 	void drawDiabolo();
+	void giraDiabolo(char c);
 
 public:
 	Ejes ejes;
@@ -105,6 +106,7 @@ public:
 
 	Rectangulo rect;
 
+	GLdouble rotacion;
 };
 
 //-------------------------------------------------------------------------

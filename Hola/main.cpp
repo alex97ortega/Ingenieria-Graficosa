@@ -26,7 +26,6 @@ Camara camera(winWidth, winHeight);
 Escena escena;
 TriAnimado tri(200, 0, 0);
 
-
 //----------- Callbacks ----------------------------------------------------
 
 void display();
@@ -169,6 +168,15 @@ void key(unsigned char key, int x, int y){
 		break;
 	case 't':
 		tri.update();
+		break;
+	case 'x':
+		escena.giraDiabolo('x');
+		break;
+	case 'y':
+		escena.giraDiabolo('y');
+		break;
+	case 'z':
+		escena.giraDiabolo('z');
 		break;
 	default:
 		need_redisplay = false;

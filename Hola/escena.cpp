@@ -5,8 +5,8 @@
 void Escena::init(){
 
 	glEnable(GL_TEXTURE_2D);
-	rect.textura.init();
-	rect.textura.load("../bmps/Zelda.bmp");
+	//rect.textura.init();
+	//rect.textura.load("../bmps/Zelda.bmp");
 	piramides[0]->triangulos[0]->textura.init();
 	piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
 }
@@ -34,6 +34,7 @@ void Escena::draw(){
 	//rect.draw();
 }
 void Escena::drawDiabolo() {
+	glRotated(rotacion, 1.0, 0.0, 0.0);
 	glRotated(90.0, 1.0, 0.0, 0.0);
 	glTranslated(0.0, 0.0, -100);
 	piramides[0]->draw();
@@ -51,10 +52,36 @@ void Escena::drawDiabolo() {
 	glRotated(-90.0, -90.0, 0.0, -1.0);
 	glTranslated(0.0, -100.0, 0);
 
-
+	glRotated(-rotacion, 1.0, 0.0, 0.0);
 }
 
 
+
+void Escena::giraDiabolo(char c) {
+	rotacion += 15;
+	switch (c)
+	{
+	case 'x':
+		drawDiabolo();
+		break;
+
+	case 'y':
+		glRotated(rotacion, 0.0, 1.0, 0.0);
+		drawDiabolo();
+		glRotated(-rotacion, 0.0, 1.0, 0.0);
+		break;
+
+	case 'z':
+		glRotated(rotacion, 0.0, 0.0, 1.0);
+		drawDiabolo();
+		glRotated(-rotacion, 0.0, 0.0, 1.0);
+		break;
+
+	default:
+		break;
+	}
+
+}
 
 //-------------------------------------------------------------------------
 
@@ -85,6 +112,7 @@ Triangulo::Triangulo(GLdouble r){
 	texttri[1].t = 1;
 	texttri[2].s = 1;
 	texttri[2].t = -1;
+
 
 }
 void Triangulo::set(int n, GLdouble h) {
