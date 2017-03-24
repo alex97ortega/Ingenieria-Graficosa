@@ -4,7 +4,7 @@
 
 void Escena::init(){
 
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D)
 	//rect.textura.init();
 	//rect.textura.load("../bmps/Zelda.bmp");
 	piramides[0]->triangulos[0]->textura.init();
@@ -12,7 +12,7 @@ void Escena::init(){
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200), rect(100,200){
+Escena::Escena() : ejes(200), rect(600,800){
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -28,10 +28,9 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-
 	ejes.draw();
-	drawDiabolo();
-	//rect.draw();
+	//drawDiabolo();
+	rect.draw();
 }
 void Escena::drawDiabolo() {
 	glRotated(rotacion, 1.0, 0.0, 0.0);
@@ -55,33 +54,6 @@ void Escena::drawDiabolo() {
 	glRotated(-rotacion, 1.0, 0.0, 0.0);
 }
 
-
-
-void Escena::giraDiabolo(char c) {
-	rotacion += 15;
-	switch (c)
-	{
-	case 'x':
-		drawDiabolo();
-		break;
-
-	case 'y':
-		glRotated(rotacion, 0.0, 1.0, 0.0);
-		drawDiabolo();
-		glRotated(-rotacion, 0.0, 1.0, 0.0);
-		break;
-
-	case 'z':
-		glRotated(rotacion, 0.0, 0.0, 1.0);
-		drawDiabolo();
-		glRotated(-rotacion, 0.0, 0.0, 1.0);
-		break;
-
-	default:
-		break;
-	}
-
-}
 
 //-------------------------------------------------------------------------
 
@@ -112,14 +84,16 @@ Triangulo::Triangulo(GLdouble r){
 	texttri[1].t = 1;
 	texttri[2].s = 1;
 	texttri[2].t = -1;
-
-
 }
+
+
 void Triangulo::set(int n, GLdouble h) {
-	Triangulo::vertices[n] = { 0, 0, h };
+	vertices[n] = { 0, 0, h };
 }
+
+
 void Triangulo::draw(){
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -141,10 +115,39 @@ void Triangulo::draw(){
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_TEXTURE_2D);
+}
+
+bool Triangulo::dentro(GLdouble x, GLdouble y){
+	if (((vertices[0].x - x) * (vertices[1].y - y)) - ((vertices[0].y - y) * (vertices[1].x - x)) < 0){
+		return false;
+	}
+
+	else if (((vertices[1].x - x) * (vertices[2].y - y)) - ((vertices[1].y - y) * (vertices[2].x - x)) < 0){
+		return false;
+	}
+
+	else if (((vertices[2].x - x) * (vertices[0].y - y)) - ((vertices[2].y - y) * (vertices[0].x - x)) < 0){
+		return false;
+	}
+	else return true;
+}
 
 
+
+void  Triangulo::posicionar(GLdouble x, GLdouble y){
+
+	centro = { x, y, 0 }; 
+	vertices[0] = { radio*cos(rotacion) + x, radio * sin(rotacion) + y, 0 };
+	vertices[1] = { radio*cos(rotacion + 2 * 3.14 / 3) + x, radio * sin(rotacion + 2 * 3.14 / 3) + y, 0 };
+	vertices[2] = { radio*cos(rotacion + 4 * 3.14 / 3) + x, radio * sin(rotacion + 4 * 3.14 / 3) + y, 0 };
 
 }
+
+
+void Triangulo::rotar(){
+	rotacion += 15;
+}
+
 
 //-------------------------------------------------------------------------
 
@@ -247,7 +250,7 @@ void Rectangulo::draw(){
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glColor4d(color.r, color.g, color.b, color.a);
-
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glVertexPointer(3, GL_DOUBLE, 0, vertices);
 	glNormal3d(normal.x, normal.y, normal.z);
 

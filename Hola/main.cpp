@@ -24,7 +24,9 @@ Camara camera(winWidth, winHeight);
 
 // Scene variables
 Escena escena;
-TriAnimado tri(200, 0, 0);
+TriAnimado tri(100, 0, 0);
+Triangulo t(100);
+
 
 //----------- Callbacks ----------------------------------------------------
 
@@ -34,6 +36,8 @@ void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
 
+enum Estados { Collage, Recortar, Animar , Diabolo };
+Estados e = Recortar;
 //-------------------------------------------------------------------------
 
 void intitGL(){ //OpenGL basic setting
@@ -120,10 +124,27 @@ void display(){
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	escena.draw();
-
-	tri.draw();
-
+	switch (e)
+	{
+	case Collage:
+		break;
+	case Recortar:
+		glDisable(GL_DEPTH_TEST);
+		escena.draw();
+		t.draw();
+		break;
+	case Animar:
+		glEnable(GL_DEPTH_TEST);
+		tri.draw();
+		break;
+	case Diabolo:
+		glDisable(GL_DEPTH_TEST);
+		escena.drawDiabolo();
+		break;
+	default:
+		break;
+	}
+	
 	glPopMatrix();
 
 	glutSwapBuffers();  //glFlush();
@@ -170,13 +191,20 @@ void key(unsigned char key, int x, int y){
 		tri.update();
 		break;
 	case 'x':
-		escena.giraDiabolo('x');
+		glRotated(1, 1.0, 0.0, 0.0);
 		break;
 	case 'y':
-		escena.giraDiabolo('y');
+		glRotated(1, 0.0, 1.0, 0.0);
 		break;
 	case 'z':
-		escena.giraDiabolo('z');
+		glRotated(1, 0.0, 0.0, 1.0);
+		break;
+	case '3':
+		// coger cacho de textura pal triangulo
+		e = Animar;
+		break;
+	case '4':
+		e = Diabolo;
 		break;
 	default:
 		need_redisplay = false;

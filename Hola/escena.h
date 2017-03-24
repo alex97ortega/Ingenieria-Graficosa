@@ -22,6 +22,11 @@ public:
 	~Triangulo(){};
 	void draw(); // por ultimo dibujar los ejes desde el punto creado tope de molongui
 	void set(int n, GLdouble h);
+	bool dentro(GLdouble x, GLdouble y);
+	void posicionar(GLdouble x, GLdouble y);
+	void rotar();
+	
+
 public:
 	GLdouble var = (2 * 3.14) / 3; // rotar lo que nos diga este numero xdddd
 	PVec3 vertices[3];
@@ -31,6 +36,11 @@ public:
 	CTex2 texttri[3];
 
 	Textura textura;
+
+
+	GLdouble rotacion;
+	GLdouble radio;
+	PVec3 centro;
 };
 
 
@@ -98,7 +108,6 @@ public:
 	void init();
 	void draw();
 	void drawDiabolo();
-	void giraDiabolo(char c);
 
 public:
 	Ejes ejes;
