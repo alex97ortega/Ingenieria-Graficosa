@@ -4,11 +4,11 @@
 
 void Escena::init(){
 
-	glEnable(GL_TEXTURE_2D)
-	//rect.textura.init();
-	//rect.textura.load("../bmps/Zelda.bmp");
-	piramides[0]->triangulos[0]->textura.init();
-	piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
+	glEnable(GL_TEXTURE_2D);
+	rect.textura.init();
+	rect.textura.load("../bmps/Zelda.bmp");
+	//piramides[0]->triangulos[0]->textura.init();
+	//piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
 }
 
 //-------------------------------------------------------------------------
@@ -101,7 +101,6 @@ void Triangulo::draw(){
 	glEnableClientState(GL_TEXTURE_2D);
 
 	glVertexPointer(3, GL_DOUBLE, 0, vertices);
-	//glColorPointer(3, GL_DOUBLE, 0, colores);
 
 	glTexCoordPointer(2, GL_DOUBLE, 0, texttri);
 
@@ -137,10 +136,10 @@ bool Triangulo::dentro(GLdouble x, GLdouble y){
 void  Triangulo::posicionar(GLdouble x, GLdouble y){
 
 	centro = { x, y, 0 }; 
-	vertices[0] = { radio*cos(rotacion) + x, radio * sin(rotacion) + y, 0 };
-	vertices[1] = { radio*cos(rotacion + 2 * 3.14 / 3) + x, radio * sin(rotacion + 2 * 3.14 / 3) + y, 0 };
-	vertices[2] = { radio*cos(rotacion + 4 * 3.14 / 3) + x, radio * sin(rotacion + 4 * 3.14 / 3) + y, 0 };
-
+	vertices[0] = { radio*cos(rotacion) + centro.x, radio * sin(rotacion) + centro.y, 0 };
+	vertices[1] = { radio*cos(rotacion + 2 * 3.14 / 3) + centro.x, radio * sin(rotacion + 2 * 3.14 / 3) + centro.y, 0 };
+	vertices[2] = { radio*cos(rotacion + 4 * 3.14 / 3) + centro.x, radio * sin(rotacion + 4 * 3.14 / 3) + centro.y, 0 };
+	
 }
 
 
@@ -149,6 +148,19 @@ void Triangulo::rotar(){
 }
 
 
+void  Triangulo::recortar(int ancho, int alto){
+	texttri[0].s = (vertices[0].x + ancho / 2) / ancho;
+	texttri[0].t = (vertices[0].x + alto / 2) / alto;
+	texttri[1].s = (vertices[1].x + ancho / 2) / ancho;
+	texttri[1].t = (vertices[1].x + alto / 2) / alto;
+	texttri[2].s = (vertices[2].x + ancho / 2) / ancho;
+	texttri[2].t = (vertices[2].x + alto / 2) / alto;
+}
+
+
+void Triangulo::setAnimar(){
+	//establecer los dos angulos a 0 y el giro a 100
+}
 //-------------------------------------------------------------------------
 
 TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(50){

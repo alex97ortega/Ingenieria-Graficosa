@@ -35,6 +35,7 @@ void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
+void motion(int px, int py);
 
 enum Estados { Collage, Recortar, Animar , Diabolo };
 Estados e = Recortar;
@@ -100,6 +101,7 @@ int main(int argc, char *argv[]){
 	glutSpecialFunc(specialKey);
 	glutDisplayFunc(display);
 	glutMouseFunc(mouse);
+	glutMotionFunc(motion);
 
 	// OpenGL basic setting
 	intitGL();
@@ -134,7 +136,6 @@ void display(){
 		t.draw();
 		break;
 	case Animar:
-		glEnable(GL_DEPTH_TEST);
 		tri.draw();
 		break;
 	case Diabolo:
@@ -200,7 +201,8 @@ void key(unsigned char key, int x, int y){
 		glRotated(1, 0.0, 0.0, 1.0);
 		break;
 	case '3':
-		// coger cacho de textura pal triangulo
+		t.recortar(winHeight, winWidth);
+		t.setAnimar();
 		e = Animar;
 		break;
 	case '4':
@@ -256,3 +258,25 @@ void mouse(int button, int state, int x, int y){
 
 //-------------------------------------------------------------------------
 
+GLdouble xWin2VV(int mx) {
+	return mx - 800 / 2.0;
+}
+
+GLdouble yWin2VV(int my) {
+	return (600 - my) - 600 / 2.0;
+}
+
+
+
+void motion(int px, int py) {
+	GLdouble x;
+	GLdouble y;
+
+	x = xWin2VV(px);
+	y = yWin2VV(py);
+
+	if (t.dentro(x, y)){
+		t.posicionar(x, y);
+		glutPostRedisplay();
+	}
+}

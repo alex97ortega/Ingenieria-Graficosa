@@ -25,6 +25,8 @@ public:
 	bool dentro(GLdouble x, GLdouble y);
 	void posicionar(GLdouble x, GLdouble y);
 	void rotar();
+	void recortar(int ancho, int alto);
+	void setAnimar();
 	
 
 public:
@@ -111,6 +113,7 @@ public:
 
 public:
 	Ejes ejes;
+
 	std::vector<PiramideTri*> piramides;
 
 	Rectangulo rect;
