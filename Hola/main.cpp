@@ -136,10 +136,11 @@ void display(){
 		t.draw();
 		break;
 	case Animar:
+		glEnable(GL_DEPTH_TEST);
 		tri.draw();
 		break;
 	case Diabolo:
-		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 		escena.drawDiabolo();
 		break;
 	default:
@@ -200,9 +201,12 @@ void key(unsigned char key, int x, int y){
 	case 'z':
 		glRotated(1, 0.0, 0.0, 1.0);
 		break;
+	case 'r':
+		
+		break;
 	case '3':
-		t.recortar(winHeight, winWidth);
-		t.setAnimar();
+		//t.recortar(winHeight, winWidth);
+		//t.setAnimar();
 		e = Animar;
 		break;
 	case '4':

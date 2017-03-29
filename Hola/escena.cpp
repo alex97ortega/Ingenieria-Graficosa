@@ -163,7 +163,7 @@ void Triangulo::setAnimar(){
 }
 //-------------------------------------------------------------------------
 
-TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(50){
+TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(rd){
 	radio = rd;
 	trans = tr;
 	rotacion = rot;
