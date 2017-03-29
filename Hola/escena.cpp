@@ -12,7 +12,7 @@ void Escena::init(){
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200), rect(600,800){
+Escena::Escena() : ejes(200), rect(600, 800), tri(100, 0, 0), t(100) {
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -59,11 +59,8 @@ void Escena::drawDiabolo() {
 
 Triangulo::Triangulo(GLdouble r){
 
-
-	GLdouble x = r * cos(var);
-	GLdouble y = r * sin(var);
-
-
+	x = r * cos(var);
+	y = r * sin(var);
 
 	vertices[0].set(r, 0, 0);
 	vertices[1].set(x, y, 0);
@@ -72,11 +69,11 @@ Triangulo::Triangulo(GLdouble r){
 	normales[0].set(0, 0, 1);
 	normales[1].set(0, 0, 1);
 	normales[2].set(0, 0, 1);
-
+	
 	colores.a = 1;
-	colores.b = 0;
+	colores.b = 1;
 	colores.g = 0;
-	colores.r = 0;
+	colores.r = 1;
 
 	texttri[0].s = -1;
 	texttri[0].t = -1;
@@ -84,6 +81,8 @@ Triangulo::Triangulo(GLdouble r){
 	texttri[1].t = 1;
 	texttri[2].s = 1;
 	texttri[2].t = -1;
+
+	radio = r;
 }
 
 
@@ -93,7 +92,7 @@ void Triangulo::set(int n, GLdouble h) {
 
 
 void Triangulo::draw(){
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -137,24 +136,23 @@ void  Triangulo::posicionar(GLdouble x, GLdouble y){
 
 	centro = { x, y, 0 }; 
 	vertices[0] = { radio*cos(rotacion) + centro.x, radio * sin(rotacion) + centro.y, 0 };
-	vertices[1] = { radio*cos(rotacion + 2 * 3.14 / 3) + centro.x, radio * sin(rotacion + 2 * 3.14 / 3) + centro.y, 0 };
-	vertices[2] = { radio*cos(rotacion + 4 * 3.14 / 3) + centro.x, radio * sin(rotacion + 4 * 3.14 / 3) + centro.y, 0 };
+	vertices[1] = { radio*cos(rotacion + 2.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 2.0 * 3.14 / 3.0) + centro.y, 0 };
+	vertices[2] = { radio*cos(rotacion + 4.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 4.0 * 3.14 / 3.0) + centro.y, 0 };
 	
 }
 
 
 void Triangulo::rotar(){
 	rotacion += 15;
+
+	vertices[0] = { radio*cos(rotacion) + centro.x, radio * sin(rotacion) + centro.y, 0 };
+	vertices[1] = { radio*cos(rotacion + 2.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 2.0 * 3.14 / 3.0) + centro.y, 0 };
+	vertices[2] = { radio*cos(rotacion + 4.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 4.0 * 3.14 / 3.0) + centro.y, 0 };
 }
 
 
 void  Triangulo::recortar(int ancho, int alto){
-	texttri[0].s = (vertices[0].x + ancho / 2) / ancho;
-	texttri[0].t = (vertices[0].x + alto / 2) / alto;
-	texttri[1].s = (vertices[1].x + ancho / 2) / ancho;
-	texttri[1].t = (vertices[1].x + alto / 2) / alto;
-	texttri[2].s = (vertices[2].x + ancho / 2) / ancho;
-	texttri[2].t = (vertices[2].x + alto / 2) / alto;
+	
 }
 
 
@@ -168,6 +166,12 @@ TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(rd){
 	trans = tr;
 	rotacion = rot;
 
+	texttri[0].s = -1;
+	texttri[0].t = -1;
+	texttri[1].s = 0;
+	texttri[1].t = 1;
+	texttri[2].s = 1;
+	texttri[2].t = -1;
 }
 
 void TriAnimado::draw(){

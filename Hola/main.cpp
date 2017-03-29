@@ -24,8 +24,7 @@ Camara camera(winWidth, winHeight);
 
 // Scene variables
 Escena escena;
-TriAnimado tri(100, 0, 0);
-Triangulo t(100);
+
 
 
 //----------- Callbacks ----------------------------------------------------
@@ -133,11 +132,11 @@ void display(){
 	case Recortar:
 		glDisable(GL_DEPTH_TEST);
 		escena.draw();
-		t.draw();
+		escena.t.draw();
 		break;
 	case Animar:
 		glEnable(GL_DEPTH_TEST);
-		tri.draw();
+		escena.tri.draw();
 		break;
 	case Diabolo:
 		glEnable(GL_DEPTH_TEST);
@@ -190,7 +189,7 @@ void key(unsigned char key, int x, int y){
 		camera.setEZ();
 		break;
 	case 't':
-		tri.update();
+		escena.tri.update();
 		break;
 	case 'x':
 		glRotated(1, 1.0, 0.0, 0.0);
@@ -202,10 +201,10 @@ void key(unsigned char key, int x, int y){
 		glRotated(1, 0.0, 0.0, 1.0);
 		break;
 	case 'r':
-		
+		escena.t.rotar();
 		break;
 	case '3':
-		//t.recortar(winHeight, winWidth);
+		escena.t.recortar(winHeight, winWidth);
 		//t.setAnimar();
 		e = Animar;
 		break;
@@ -263,11 +262,11 @@ void mouse(int button, int state, int x, int y){
 //-------------------------------------------------------------------------
 
 GLdouble xWin2VV(int mx) {
-	return mx - 800 / 2.0;
+	return mx - winWidth / 2.0;
 }
 
 GLdouble yWin2VV(int my) {
-	return (600 - my) - 600 / 2.0;
+	return (winHeight - my) - winHeight / 2.0;
 }
 
 
@@ -279,8 +278,8 @@ void motion(int px, int py) {
 	x = xWin2VV(px);
 	y = yWin2VV(py);
 
-	if (t.dentro(x, y)){
-		t.posicionar(x, y);
+	if (escena.t.dentro(x, y)){
+		escena.t.posicionar(x, y);
 		glutPostRedisplay();
 	}
 }

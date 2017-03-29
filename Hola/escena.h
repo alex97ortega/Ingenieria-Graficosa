@@ -20,7 +20,7 @@ class Triangulo {
 public:
 	Triangulo(GLdouble r);
 	~Triangulo(){};
-	void draw(); // por ultimo dibujar los ejes desde el punto creado tope de molongui
+	void draw(); 
 	void set(int n, GLdouble h);
 
 
@@ -32,11 +32,15 @@ public:
 	
 
 public:
-	GLdouble var = (2 * 3.14) / 3; // rotar lo que nos diga este numero xdddd
+	GLdouble var = (2 * 3.14) / 3; 
 	PVec3 vertices[3];
 	PVec3 normales[3];
 	Color4 colores;
-	
+
+	GLdouble x;
+	GLdouble y;
+
+
 	CTex2 texttri[3];
 
 	Textura textura;
@@ -64,6 +68,8 @@ public:
 	GLdouble rotacion;
 	GLdouble trans;
 
+
+	CTex2 texttri[3];
 
 };
 
@@ -114,6 +120,9 @@ public:
 
 public:
 	Ejes ejes;
+
+	Triangulo t;
+	TriAnimado tri;
 
 	std::vector<PiramideTri*> piramides;
 
