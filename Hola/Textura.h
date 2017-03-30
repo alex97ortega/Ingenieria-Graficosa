@@ -28,6 +28,6 @@ public:
 public:
 	GLuint w, h; // dimensiones de la imagen
 	GLuint id; // identificador interno de la textura
-
+	PixMap24RGB map;
 	
 };

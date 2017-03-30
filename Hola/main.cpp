@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
 	// Initialization
 	glutInitWindowSize(winWidth, winHeight);
 	//glutInitWindowPosition (140, 140);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
 	glutInit(&argc, argv);
 
 	// Window construction
@@ -204,6 +204,7 @@ void key(unsigned char key, int x, int y){
 		escena.t.rotar();
 		break;
 	case '2':
+		//obtener collage como textura, y guardarla como bmp
 		e = Recortar;
 		break;
 	case '3':
@@ -213,10 +214,9 @@ void key(unsigned char key, int x, int y){
 		break;
 	case '4':
 		escena.tri.tri.recortar(winHeight, winWidth, escena.t.vertices);
-		escena.piramides[0]->añadirText(escena.tri.tri.texttri);
-		escena.piramides[1]->añadirText(escena.tri.tri.texttri);
-		escena.piramides[2]->añadirText(escena.tri.tri.texttri);
-		escena.piramides[3]->añadirText(escena.tri.tri.texttri);
+		for (auto p : escena.piramides){
+			p->añadirText(escena.tri.tri.texttri);
+		}
 		e = Diabolo;
 		break;
 	default:

@@ -133,9 +133,10 @@ public:
 
 	std::vector<PiramideTri*> piramides;
 
-	Rectangulo rect;
-
+	Rectangulo rect, rect2, rect3, rect4;
 	GLdouble rotacion;
+
+
 };
 
 //-------------------------------------------------------------------------

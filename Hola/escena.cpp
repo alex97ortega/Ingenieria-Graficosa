@@ -6,13 +6,15 @@ void Escena::init(){
 
 	glEnable(GL_TEXTURE_2D);
 	rect.textura.init();
-	rect.textura.load("../bmps/Zelda.bmp");
+	rect2.textura.init();
+	rect3.textura.init();
 	//piramides[0]->triangulos[0]->textura.init();
 	//piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
+
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200), rect(600, 800), tri(100, 0, 0), t(100) {
+Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 400), rect3(50, 80), rect4 (1,1), tri(100, 0, 0), t(100) {
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -30,7 +32,13 @@ Escena::~Escena(){
 void Escena::draw(){
 	ejes.draw();
 	//drawDiabolo();
+
+	rect.textura.load("../bmps/Zelda.bmp");
 	rect.draw();
+	rect2.textura.load("../bmps/ray.bmp");
+	rect2.draw();
+	rect3.textura.load("../bmps/earth24.bmp", 1);
+	rect3.draw();
 }
 void Escena::drawDiabolo() {
 	glRotated(rotacion, 1.0, 0.0, 0.0);
@@ -169,7 +177,6 @@ void  Triangulo::recortar(int ancho, int alto, PVec3 vt[3]){
 	texttri[2].s = (vt[2].x + ancho / 2) / ancho;
 	texttri[2].t = (vt[2].y + alto / 2) / alto;
 
-
 }
 
 
@@ -242,7 +249,7 @@ void PiramideTri::añadirText(CTex2 coor[3]){
 	triangulos[2]->texttri[0] = coor[2];
 	triangulos[2]->texttri[1] = coor[0];
 	triangulos[2]->texttri[2] = coor[1];
-
+	
 }
 
 
