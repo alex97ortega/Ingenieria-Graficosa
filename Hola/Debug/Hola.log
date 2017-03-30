@@ -1,17 +1,19 @@
-﻿Build started 29/03/2017 17:50:36.
-     1>Project "C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\Hola\Hola.vcxproj" on node 2 (Build target(s)).
+﻿Compilación iniciada a las 30/03/2017 10:23:10.
+     1>Proyecto "D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\Hola\Hola.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt escena.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt escena.cpp main.cpp
+         main.cpp
          escena.cpp
+         Generando código...
        Link:
-         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\bin\HolaDebug.exe" /INCREMENTAL /NOLOGO freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\bin\HolaDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\bin\HolaDebug.lib" /MACHINE:X86 Debug\escena.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.exe" /INCREMENTAL /NOLOGO freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.lib" /MACHINE:X86 Debug\escena.obj
          Debug\main.obj
          Debug\PixMap24RGB.obj
          Debug\Textura.obj
          Debug\tipos.obj
-         Hola.vcxproj -> C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\bin\HolaDebug.exe
-     1>Done Building Project "C:\hlocal\Nueva carpeta\Ingenieria-Graficosa\Hola\Hola.vcxproj" (Build target(s)).
+         Hola.vcxproj -> D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\bin\HolaDebug.exe
+     1>Compilación del proyecto terminada "D:\INFORMATICA GRAFICA\Ingenieria-Graficosa\Hola\Hola.vcxproj" (Build destinos).
 
-Build succeeded.
+Compilación correcta.
 
-Time Elapsed 00:00:00.64
+Tiempo transcurrido 00:00:01.14

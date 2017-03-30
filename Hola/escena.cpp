@@ -70,19 +70,21 @@ Triangulo::Triangulo(GLdouble r){
 	normales[1].set(0, 0, 1);
 	normales[2].set(0, 0, 1);
 	
-	colores.a = 1;
-	colores.b = 1;
+	colores.a = 0;
+	colores.b = 0;
 	colores.g = 0;
-	colores.r = 1;
+	colores.r = 0;
 
-	texttri[0].s = -1;
-	texttri[0].t = -1;
+	
+	texttri[0].s = 0;
+	texttri[0].t = 0;
 	texttri[1].s = 0;
-	texttri[1].t = 1;
-	texttri[2].s = 1;
-	texttri[2].t = -1;
-
+	texttri[1].t = 0;
+	texttri[2].s = 0;
+	texttri[2].t = 0;
+	
 	radio = r;
+
 }
 
 
@@ -90,9 +92,17 @@ void Triangulo::set(int n, GLdouble h) {
 	vertices[n] = { 0, 0, h };
 }
 
+void Triangulo::cambio(){
+	slinea = false;
+}
 
 void Triangulo::draw(){
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+
+	if (slinea){
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else 
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -143,21 +153,32 @@ void  Triangulo::posicionar(GLdouble x, GLdouble y){
 
 
 void Triangulo::rotar(){
-	rotacion += 15;
-
+	rotacion += 0.1;
 	vertices[0] = { radio*cos(rotacion) + centro.x, radio * sin(rotacion) + centro.y, 0 };
 	vertices[1] = { radio*cos(rotacion + 2.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 2.0 * 3.14 / 3.0) + centro.y, 0 };
 	vertices[2] = { radio*cos(rotacion + 4.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 4.0 * 3.14 / 3.0) + centro.y, 0 };
 }
 
 
-void  Triangulo::recortar(int ancho, int alto){
-	
+void  Triangulo::recortar(int ancho, int alto, PVec3 vt[3]){
+
+	texttri[0].s = (vt[0].x + ancho / 2) / ancho;
+	texttri[0].t = (vt[0].y + alto / 2) / alto;
+	texttri[1].s = (vt[1].x + ancho / 2) / ancho;
+	texttri[1].t = (vt[1].y + alto / 2) / alto;
+	texttri[2].s = (vt[2].x + ancho / 2) / ancho;
+	texttri[2].t = (vt[2].y + alto / 2) / alto;
+
+
 }
 
 
 void Triangulo::setAnimar(){
-	//establecer los dos angulos a 0 y el giro a 100
+	centro = { 0, 0, 0 };
+	rotacion = 0;
+	vertices[0] = { radio*cos(rotacion) + centro.x, radio * sin(rotacion) + centro.y, 0 };
+	vertices[1] = { radio*cos(rotacion + 2.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 2.0 * 3.14 / 3.0) + centro.y, 0 };
+	vertices[2] = { radio*cos(rotacion + 4.0 * 3.14 / 3.0) + centro.x, radio * sin(rotacion + 4.0 * 3.14 / 3.0) + centro.y, 0 };
 }
 //-------------------------------------------------------------------------
 
@@ -166,21 +187,17 @@ TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(rd){
 	trans = tr;
 	rotacion = rot;
 
-	texttri[0].s = -1;
-	texttri[0].t = -1;
-	texttri[1].s = 0;
-	texttri[1].t = 1;
-	texttri[2].s = 1;
-	texttri[2].t = -1;
 }
 
 void TriAnimado::draw(){
 
-	GLdouble posx = radio * cos(trans);
-	GLdouble posy = radio * sin(trans);
+	posx = radio * cos(trans);
+	posy = radio * sin(trans);
 
 	glTranslated(posx, posy, 0);
 	glRotated(rotacion, 0.0, 0.0, 1.0);
+
+	tri.cambio();
 
 	tri.draw();
 
@@ -208,10 +225,25 @@ PiramideTri::PiramideTri(GLdouble h, GLdouble r) {
 }
 void PiramideTri::draw(){
 	for (int i = 2; i >= 0; i--) {
+		triangulos[i]->cambio();
 		triangulos[i]->draw();
 	}
 }
 
+void PiramideTri::añadirText(CTex2 coor[3]){
+	triangulos[0]->texttri[0] = coor[0];
+	triangulos[0]->texttri[1] = coor[1];
+	triangulos[0]->texttri[2] = coor[2];
+
+	triangulos[1]->texttri[0] = coor[1];
+	triangulos[1]->texttri[1] = coor[2];
+	triangulos[1]->texttri[2] = coor[0];
+
+	triangulos[2]->texttri[0] = coor[2];
+	triangulos[2]->texttri[1] = coor[0];
+	triangulos[2]->texttri[2] = coor[1];
+
+}
 
 
 //-------------------------------------------------------------------------

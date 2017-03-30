@@ -203,12 +203,20 @@ void key(unsigned char key, int x, int y){
 	case 'r':
 		escena.t.rotar();
 		break;
+	case '2':
+		e = Recortar;
+		break;
 	case '3':
-		escena.t.recortar(winHeight, winWidth);
-		//t.setAnimar();
+		escena.tri.tri.recortar(winHeight, winWidth, escena.t.vertices);
+		escena.tri.tri.setAnimar();
 		e = Animar;
 		break;
 	case '4':
+		escena.tri.tri.recortar(winHeight, winWidth, escena.t.vertices);
+		escena.piramides[0]->añadirText(escena.tri.tri.texttri);
+		escena.piramides[1]->añadirText(escena.tri.tri.texttri);
+		escena.piramides[2]->añadirText(escena.tri.tri.texttri);
+		escena.piramides[3]->añadirText(escena.tri.tri.texttri);
 		e = Diabolo;
 		break;
 	default:

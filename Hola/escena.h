@@ -27,8 +27,9 @@ public:
 	bool dentro(GLdouble x, GLdouble y);
 	void posicionar(GLdouble x, GLdouble y);
 	void rotar();
-	void recortar(int ancho, int alto);
+	void recortar(int ancho, int alto, PVec3 vt[3]);
 	void setAnimar();
+	void cambio();
 	
 
 public:
@@ -43,11 +44,13 @@ public:
 
 	CTex2 texttri[3];
 
-	Textura textura;
+	//Textura textura;
 
 	GLdouble rotacion;
 	GLdouble radio;
 	PVec3 centro;
+
+	bool slinea = true;
 };
 
 
@@ -61,6 +64,9 @@ public:
 	void update();
 
 public:
+
+	GLdouble posx;
+	GLdouble posy;
 
 	Triangulo tri;
 
@@ -80,6 +86,7 @@ public:
 	PiramideTri(GLdouble h, GLdouble radio);
 	~PiramideTri(){};
 	void draw();
+	void añadirText(CTex2 coor[3]);
 public:
 
 	std::vector<Triangulo*> triangulos;
