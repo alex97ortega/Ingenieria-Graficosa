@@ -25,7 +25,7 @@ Camara camera(winWidth, winHeight);
 // Scene variables
 Escena escena;
 
-
+bool mosaico = false;
 
 //----------- Callbacks ----------------------------------------------------
 
@@ -35,9 +35,10 @@ void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void motion(int px, int py);
+void tiling();
 
 enum Estados { Collage, Recortar, Animar , Diabolo };
-Estados e = Recortar;
+Estados e = Collage;
 //-------------------------------------------------------------------------
 
 void intitGL(){ //OpenGL basic setting
@@ -128,12 +129,36 @@ void display(){
 	switch (e)
 	{
 	case Collage:
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		escena.rect.textura.activar();
+		escena.rect.draw();
+		escena.rect.textura.desactivar();
+
+		escena.rect2.textura.activar();
+		glRotated(-45.0, 0.0, 0.0, 1.0);
+		glTranslated(-50.0, -300.0, 0.0);
+		escena.rect2.draw();
+		glTranslated(50.0, 300.0, 0.0);
+		glRotated(45.0, 0.0, 0.0, 1.0);
+		escena.rect2.textura.desactivar();
+
+		escena.rect3.textura.activar();
+		glTranslated(200.0, 200.0, 0.0);
+		escena.rect3.draw();
+		glTranslated(-200.0, -200.0, 0.0);
+		escena.rect3.textura.desactivar();
 		break;
+
 	case Recortar:
 		glDisable(GL_DEPTH_TEST);
-		escena.draw();
+		glDisable(GL_BLEND);
+		escena.rect4.textura.activar();
+		escena.rect4.draw();
 		escena.t.draw();
 		break;
+
 	case Animar:
 		glEnable(GL_DEPTH_TEST);
 		escena.tri.draw();
@@ -203,8 +228,16 @@ void key(unsigned char key, int x, int y){
 	case 'r':
 		escena.t.rotar();
 		break;
+	case 'm':
+		mosaico = !mosaico;
+		if (mosaico == false)
+			viewPort.set(0, 0, winWidth, winHeight);
+		break;
 	case '2':
-		//obtener collage como textura, y guardarla como bmp
+		escena.capturar(winWidth, winHeight);
+		escena.rect4.textura.init();
+		escena.rect4.textura.load("../bmps/collage.bmp");
+		escena.rect4.textura.desactivar();
 		e = Recortar;
 		break;
 	case '3':
@@ -289,5 +322,25 @@ void motion(int px, int py) {
 	if (escena.t.dentro(x, y)){
 		escena.t.posicionar(x, y);
 		glutPostRedisplay();
+	}
+}
+
+//-------------------------------------------------------------------------
+
+void tiling(){
+
+	int x = 0;
+	int y = 0;
+	int ancho = winWidth / 4;
+	int alto = winHeight / 3;
+
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 4; j++){
+			viewPort.set(x, y, ancho, alto);
+			escena.drawDiabolo();
+			x += ancho;
+		}
+		x = 0;
+		y += alto;
 	}
 }

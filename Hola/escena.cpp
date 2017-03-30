@@ -4,17 +4,21 @@
 
 void Escena::init(){
 
-	glEnable(GL_TEXTURE_2D);
 	rect.textura.init();
+	rect.textura.load("../bmps/ray.bmp");
+	rect.textura.desactivar();
 	rect2.textura.init();
+	rect2.textura.load("../bmps/Zelda.bmp", 100);
+	rect2.textura.desactivar();
 	rect3.textura.init();
-	//piramides[0]->triangulos[0]->textura.init();
-	//piramides[0]->triangulos[0]->textura.load("../bmps/Zelda.bmp");
+	rect3.textura.load("../bmps/ray.bmp", PixMap24RGB::rgb_color{ 0, 0, 0 }, 100);
+	rect3.textura.desactivar();
+	
 
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 400), rect3(50, 80), rect4 (1,1), tri(100, 0, 0), t(100) {
+Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 266), rect3(100, 133), rect4 (600,800), tri(100, 0, 0), t(100) {
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -31,14 +35,7 @@ Escena::~Escena(){
 
 void Escena::draw(){
 	ejes.draw();
-	//drawDiabolo();
 
-	rect.textura.load("../bmps/Zelda.bmp");
-	rect.draw();
-	rect2.textura.load("../bmps/ray.bmp");
-	rect2.draw();
-	rect3.textura.load("../bmps/earth24.bmp", 1);
-	rect3.draw();
 }
 void Escena::drawDiabolo() {
 	glRotated(rotacion, 1.0, 0.0, 0.0);
@@ -63,6 +60,21 @@ void Escena::drawDiabolo() {
 }
 
 
+void Escena::capturar(int ancho, int alto){
+
+	PixMap24RGB pixmap;
+	pixmap.create_pixmap(ancho, alto);
+
+	glReadBuffer(GL_FRONT);
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, ancho, alto, 0);
+	glReadBuffer(GL_BACK);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, pixmap.data());
+
+	pixmap.save_bmpBGR("../bmps/collage.bmp");
+
+
+}
+
 //-------------------------------------------------------------------------
 
 Triangulo::Triangulo(GLdouble r){
@@ -78,7 +90,7 @@ Triangulo::Triangulo(GLdouble r){
 	normales[1].set(0, 0, 1);
 	normales[2].set(0, 0, 1);
 	
-	colores.a = 0;
+	colores.a = 1;
 	colores.b = 0;
 	colores.g = 0;
 	colores.r = 0;
@@ -113,7 +125,6 @@ void Triangulo::draw(){
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_TEXTURE_2D);
 
@@ -127,10 +138,10 @@ void Triangulo::draw(){
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_TEXTURE_2D);
+
 }
 
 bool Triangulo::dentro(GLdouble x, GLdouble y){
@@ -340,9 +351,9 @@ void Ejes::draw(){
 	glDrawArrays(GL_LINES, 0, 6);
 	glLineWidth(1);
 
-	glDisableClientState(GL_COLOR_ARRAY);
+	//glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
-
+	
 
 	/* glLineWidth(2);
 	glBegin(GL_LINES);

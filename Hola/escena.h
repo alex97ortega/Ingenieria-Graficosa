@@ -124,6 +124,7 @@ public:
 	void init();
 	void draw();
 	void drawDiabolo();
+	void capturar(int ancho, int alto);
 
 public:
 	Ejes ejes;

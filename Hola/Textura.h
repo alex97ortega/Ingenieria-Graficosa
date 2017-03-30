@@ -15,7 +15,7 @@ public:
 	}; // establecer filtros
 
 	void activar() {
-		glBindTexture(GL_TEXTURE_2D, id); glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		glBindTexture(GL_TEXTURE_2D, id); glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	};
 
 	void desactivar() { glBindTexture(GL_TEXTURE_2D, 0); };
