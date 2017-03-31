@@ -160,9 +160,9 @@ void display(){
 		break;
 
 	case Animar:
-		glEnable(GL_DEPTH_TEST);
 		escena.draw();
-		escena.tri.draw();
+		glDisable(GL_DEPTH_TEST);
+		escena.tri.draw();		
 		break;
 	case Diabolo:
 		glEnable(GL_DEPTH_TEST);
@@ -236,9 +236,11 @@ void key(unsigned char key, int x, int y){
 		escena.t.rotar();
 		break;
 	case 'm':
-		mosaico = !mosaico;
-		if (mosaico == false)
-			viewPort.set(0, 0, winWidth, winHeight);
+		if (e == Diabolo){
+			mosaico = !mosaico;
+			if (mosaico == false)
+				viewPort.set(0, 0, winWidth, winHeight);
+		}		
 		break;
 	case '2':
 		escena.capturar(winWidth, winHeight);
@@ -248,7 +250,7 @@ void key(unsigned char key, int x, int y){
 		e = Recortar;
 		break;
 	case '3':
-		escena.tri.tri.recortar(winHeight, winWidth, escena.t.vertices);
+		escena.tri.tri.recortar(winWidth, winHeight, escena.t.vertices);
 		escena.tri.tri.setAnimar();
 		e = Animar;
 		break;
@@ -340,7 +342,6 @@ void tiling(){
 	int y = 0;
 	int ancho = winWidth / 4;
 	int alto = winHeight / 3;
-
 	for (int i = 0; i < 3; i++){
 		for (int j = 0; j < 4; j++){
 			viewPort.set(x, y, ancho, alto);

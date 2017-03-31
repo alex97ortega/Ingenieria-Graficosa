@@ -11,7 +11,7 @@ void Escena::init(){
 	rect2.textura.load("../bmps/Zelda.bmp", 100);
 	rect2.textura.desactivar();
 	rect3.textura.init();
-	rect3.textura.load("../bmps/ray.bmp", PixMap24RGB::rgb_color{ 0, 0, 0 }, 100);
+	rect3.textura.load("../bmps/meatboy.bmp", PixMap24RGB::rgb_color{ 0,0,0 }, 100);
 	rect3.textura.desactivar();
 	
 
@@ -19,7 +19,6 @@ void Escena::init(){
 
 //-------------------------------------------------------------------------
 Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 266), rect3(100, 133), rect4 (600,800), tri(100, 200, 0, 0), t(100) {
-
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(-100, -100));
@@ -180,7 +179,7 @@ void Triangulo::rotar(){
 
 
 void  Triangulo::recortar(int ancho, int alto, PVec3 vt[3]){
-
+	
 	texttri[0].s = (vt[0].x + ancho / 2) / ancho;
 	texttri[0].t = (vt[0].y + alto / 2) / alto;
 	texttri[1].s = (vt[1].x + ancho / 2) / ancho;
@@ -242,9 +241,9 @@ PiramideTri::PiramideTri(GLdouble h, GLdouble r) {
 	triangulos[2]->set(2, h);
 }
 void PiramideTri::draw(){
-	for (int i = 2; i >= 0; i--) {
-		triangulos[i]->cambio();
-		triangulos[i]->draw();
+	for (auto i : triangulos){
+		i->cambio();
+		i->draw();
 	}
 }
 
