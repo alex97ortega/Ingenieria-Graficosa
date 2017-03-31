@@ -58,7 +58,7 @@ public:
 
 class TriAnimado {
 public:
-	TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot);
+	TriAnimado(GLdouble dim, GLdouble rd, GLdouble tr, GLdouble rot);
 	~TriAnimado(){};
 	void draw();
 	void update();

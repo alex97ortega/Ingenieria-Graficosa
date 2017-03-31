@@ -18,7 +18,7 @@ void Escena::init(){
 }
 
 //-------------------------------------------------------------------------
-Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 266), rect3(100, 133), rect4 (600,800), tri(100, 0, 0), t(100) {
+Escena::Escena() : ejes(200), rect(600, 800), rect2(200, 266), rect3(100, 133), rect4 (600,800), tri(100, 200, 0, 0), t(100) {
 
 	piramides.push_back(new PiramideTri(100, 100));
 	piramides.push_back(new PiramideTri(100, 100));
@@ -200,7 +200,7 @@ void Triangulo::setAnimar(){
 }
 //-------------------------------------------------------------------------
 
-TriAnimado::TriAnimado(GLdouble rd, GLdouble tr, GLdouble rot) : tri(rd){
+TriAnimado::TriAnimado(GLdouble dim, GLdouble rd, GLdouble tr, GLdouble rot) : tri(dim){
 	radio = rd;
 	trans = tr;
 	rotacion = rot;

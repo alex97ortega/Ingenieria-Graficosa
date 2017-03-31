@@ -161,15 +161,22 @@ void display(){
 
 	case Animar:
 		glEnable(GL_DEPTH_TEST);
+		escena.draw();
 		escena.tri.draw();
 		break;
 	case Diabolo:
 		glEnable(GL_DEPTH_TEST);
-		escena.drawDiabolo();
+		if (!mosaico){
+			escena.draw();
+			escena.drawDiabolo();
+		}
 		break;
 	default:
 		break;
 	}
+	
+	if (mosaico)
+		tiling();
 	
 	glPopMatrix();
 
